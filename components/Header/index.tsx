@@ -1,9 +1,5 @@
 import Head from 'next/head'
-
-type HeaderProps = {
-    title?: string
-}
-
+import { HeaderProps } from './HeaderType'
 
 const NormalHeader = ({ title = 'Finstable' }: HeaderProps) => {
     return (

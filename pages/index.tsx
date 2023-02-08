@@ -2,6 +2,7 @@ import { Inter } from '@next/font/google'
 import TotalValue from '@/components/Balance/TotalValue'
 import Image from 'next/image'
 import AssetBalance from '@/components/Balance/AssetBalance'
+import { BalanceData, defaultBalance } from '@/config/balance'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,7 +17,7 @@ export default function Home() {
           <span>Balances</span>
       </div>
       <div className='flex flex-col pt-[1%] gap-2'>
-        <AssetBalance symbol='ada' />
+        {defaultBalance.map((item: BalanceData, key) => <AssetBalance key={key} {...item} />)}
       </div>
       </div>
     </>
