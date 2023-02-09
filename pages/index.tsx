@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <TotalValue />
-      <div className='text-[16px] pt-[2%] fam-poppins'>
+      <div className='text-[16px] pt-[2%]'>
       <div className='flex justify-between items-center px-[2%]'>
           <span>Assets</span>
           <span>Balances</span>

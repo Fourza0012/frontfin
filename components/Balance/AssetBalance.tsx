@@ -5,7 +5,7 @@ import Image from 'next/image'
 const AssetBalance = ({ symbol='-', value=0, balance=0  }: BalanceData) => {
     const symbolImg = findBalanceSymbol(symbol)
     return (
-        <div className='py-[1%] px-[2%] border w-full rounded-[15px] drop-shadow-2xl flex justify-between items-center'>
+        <div className='py-[1%] px-[2%] border w-full rounded-[15px] shadow-sm flex justify-between items-center'>
           <div className='flex items-center'>
             {typeof symbolImg === 'string' && 
             <Image

@@ -1,9 +1,21 @@
-
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import LoginDropDown from './LoginDropDown'
 
 const HomeNavbar = () => {
+  const [open, setOpen] = useState(false)
+    useEffect(() => {
+      const closeDropdown = (e : MouseEvent) => {
+        const loginMenu = document.getElementById('loginMenu')
+        if (((e.target as HTMLElement)?.id == 'btnLogin') || loginMenu?.contains((e.target as HTMLElement))) return
+        setOpen(false)
+      }
+        document.body.addEventListener('click', closeDropdown)
+        return () => document.body.removeEventListener('click', closeDropdown)
+    }, [])
+
     return (
-        <div className='w-full bg-white px-[70px] py-[12px] flex justify-between items-center'>
+        <div className='w-full bg-white px-[70px] py-[12px] flex justify-between items-center relative'>
           <Image
             src="/image/finstable.png"
             alt="Finstable"
@@ -16,10 +28,11 @@ const HomeNavbar = () => {
             <a className='text-[#0091ff] hover:underline hover:decoration-4' href="">
               Wallet
             </a>
-            <button className='text-white bg-[#0056DA] rounded-[12px] px-[25px] py-[12px]' onClick={() => {}}>
+            <button id='btnLogin' className='text-white bg-[#0056DA] rounded-[12px] px-[25px] py-[12px]' onClick={() => setOpen(true)}>
               Connect Wallet
             </button>
           </div>
+          {open && <LoginDropDown />}
         </div>
     )
 }
