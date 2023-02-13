@@ -1,13 +1,9 @@
-import { Inter } from '@next/font/google'
 import TotalValue from '@/components/Balance/TotalValue'
-import Image from 'next/image'
 import AssetBalance from '@/components/Balance/AssetBalance'
 import { BalanceData, defaultBalance } from '@/config/balance'
 
-
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+ const Home = ({ defaultAccount } : { defaultAccount: string }) => {
+  console.log('home', defaultAccount)
   return (
     <>
       <TotalValue />
@@ -23,3 +19,4 @@ export default function Home() {
     </>
   )
 }
+export default Home

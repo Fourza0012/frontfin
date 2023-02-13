@@ -4,12 +4,10 @@ import { ReactNode, useState } from "react"
 import DropDownWithBtn from "./DropDownWithBtn"
 import WalletLoginBtn from "./WalletLoginBtn"
 import UserSectionForm from "./UserSectionForm"
+import { HomeProp } from "."
 
-const AccountSection = () => {
+const AccountSection = ({ defaultAccount, handleMetaLogin }: HomeProp) => {
     const [logginIn, setLoggingIn] = useState('')
-    const { defaultAccount, userBalance, handleMetaLogin } = useEthereum()
-    // console.log('defaultAccount', defaultAccount)
-    // console.log('userBalance', userBalance)
     const handleLoginType = (type: string) => {
         setLoggingIn(type)
         if (type === 'metamask') { handleMetaLogin().then(() => setLoggingIn('')) }
