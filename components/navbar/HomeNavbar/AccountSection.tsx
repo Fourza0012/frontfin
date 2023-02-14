@@ -32,7 +32,7 @@ const AccountSection = () => {
                 <NonUserForm>
                     {loginableList.map((item, key) => <WalletLoginBtn key={key} {...item} loggingIn={logginIn} handleLoginMethod={handleLoginType} />)}
                 </NonUserForm>
-              ) : <UserSectionForm account={account} />}
+              ) : <UserSectionForm />}
               
             </div>
     )

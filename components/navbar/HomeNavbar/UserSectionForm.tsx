@@ -1,12 +1,23 @@
 import DropDownWithBtn from "./DropDownWithBtn"
 import { FaChevronDown } from 'react-icons/fa'
 import { BsFillExclamationTriangleFill, BsExclamationCircle } from 'react-icons/bs'
-import { MdContentCopy, MdLogout } from 'react-icons/md'
+import { MdCheckCircleOutline, MdContentCopy, MdLogout } from 'react-icons/md'
 import { convertAccount } from "@/functions"
 import { networkList, NetworkType } from "@/config/login"
 import Image from "next/image"
+import { useAppSelector } from "@/app/hooks"
+import { useState } from "react"
 
-const UserSectionForm = ({ account }: { account: string }) => {
+const UserSectionForm = () => {
+    const [copying, setCopying] = useState(false)
+    const account = useAppSelector(state => state.user.account)
+    const handleCopy = () => {
+        if (!copying) {
+            setCopying(true)
+            navigator.clipboard.writeText(account)
+            setTimeout(() => setCopying(false), 3000)
+        }
+    }
     return (
         <>
         <DropDownWithBtn btnIcon={<><BsFillExclamationTriangleFill color='#EBBC2E' /> Change Network</>} btnColor='font-semibold bg-[#0091FF]/[.05] border border-[#0091FF] text-[#0091FF]' typeId='network'>
@@ -36,7 +47,10 @@ const UserSectionForm = ({ account }: { account: string }) => {
                                 />
                                 <label className='text-[14px]'>{convertAccount(account)}</label>
                         </div>
-                        <MdContentCopy color='#0091FF' />
+                        <button className="relative" onClick={handleCopy}>
+                          {copying && <MdCheckCircleOutline color='#0091FF' className="absolute inset-0" />}
+                          <MdContentCopy color={copying ? '#d9d9d9' : '#0091FF'} />
+                        </button>
                     </div>
                     <button className='ml-auto flex justify-center items-center gap-2 mt-3'>
                         <MdLogout /> Logout
