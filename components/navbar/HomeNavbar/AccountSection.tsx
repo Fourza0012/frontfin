@@ -3,23 +3,16 @@ import { useEthereum } from "@/hooks/ethereum"
 import { ReactNode, useState } from "react"
 import DropDownWithBtn from "./DropDownWithBtn"
 import WalletLoginBtn from "./WalletLoginBtn"
-import UserSectionForm from "./UserSectionForm"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { addAccount } from "@/features/user/userSlice"
+import UserSectionForm from "./UserSection/UserSectionForm"
+import { useUser } from "@/hooks/user"
 
 const AccountSection = () => {
     const { handleMetaLogin } = useEthereum()
-    const dispatch = useAppDispatch()
-    const account = useAppSelector(state => state.user.account)
+    const { account } = useUser()
     const [logginIn, setLoggingIn] = useState('')
     const handleLoginType = (type: string) => {
         setLoggingIn(type)
-        if (type === 'metamask') { 
-          handleMetaLogin().then((res) => {
-            dispatch(addAccount(res))
-            setLoggingIn('')
-          }) 
-        }
+        if (type === 'metamask') handleMetaLogin().then(() => setLoggingIn('')) 
     }
     
     return (

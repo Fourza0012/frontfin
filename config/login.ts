@@ -9,9 +9,9 @@ export const loginableList: loginType[] = [
 export interface NetworkType {
     name: string,
     img: string,
-    netId: string
+    netId: Number
 }
 
 export const networkList: NetworkType[] = [
-    { name: 'Bitkub Chain', img: '/image/bitkub.png', netId: '25925' }
+    { name: 'Bitkub Chain', img: '/image/bitkub.png', netId: 25925 }
 ]

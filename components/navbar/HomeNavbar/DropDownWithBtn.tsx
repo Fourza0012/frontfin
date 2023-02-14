@@ -8,8 +8,9 @@ type loginDropType = {
 const DropDownWithBtn = ({ btnIcon, btnColor = 'bg-white', typeId, children } : loginDropType) => {
     const [open, setOpen] = useState(false)
     const closeDropdown = (e : MouseEvent) => {
+    const btnMenu = document.getElementById(`btn-${typeId}`)
     const loginMenu = document.getElementById(`drop-${typeId}`)
-    if (((e.target as HTMLElement)?.id == `btn-${typeId}`) || loginMenu?.contains((e.target as HTMLElement))) return
+    if (btnMenu?.contains((e.target as HTMLElement)) || loginMenu?.contains((e.target as HTMLElement))) return
       setOpen(false)
     }
     useEffect(() => {

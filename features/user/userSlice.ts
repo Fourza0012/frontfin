@@ -1,7 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ethers, Provider, Signer } from 'ethers'
+import { Provider, Signer } from 'ethers'
+
+export interface AddAccountForm { 
+    account: string, 
+    network: Number | null, 
+    provider: Provider | null, 
+    signer: Signer | null 
+}
+
+
 interface UserState {
     account: string,
+    network: Number | null,
     balance: string,
     provider: Provider | null,
     signer: Signer | null
@@ -9,6 +19,7 @@ interface UserState {
 
 const initialState: UserState = {
     account: '',
+    network: null,
     balance: '',
     provider: null,
     signer: null
@@ -18,8 +29,9 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        addAccount: (state, action: PayloadAction<{ account: string, provider: Provider | null, signer: Signer | null }>) => {
+        addAccount: (state, action: PayloadAction<AddAccountForm>) => {
             state.account = action.payload.account
+            state.network = action.payload.network
             state.provider = action.payload.provider
             state.signer = action.payload.signer
         }
