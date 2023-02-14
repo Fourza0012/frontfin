@@ -1,17 +1,17 @@
 import BodyComponent from '@/components/BodyComponent'
 import NormalHeader from '@/components/Header'
-import { useEthereum } from '@/hooks/ethereum'
+import { Provider } from 'react-redux'
+import { store } from '@/app/store'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { defaultAccount, userBalance, handleMetaLogin } = useEthereum()
   return (
-    <>
+    <Provider store={store}>
     <NormalHeader />
-      <BodyComponent defaultAccount={defaultAccount} handleMetaLogin={handleMetaLogin}>
-        <Component {...pageProps} defaultAccount={defaultAccount} />
+      <BodyComponent>
+        <Component {...pageProps} />
       </BodyComponent>
-    </>
+    </Provider>
   )
 }

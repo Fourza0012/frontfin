@@ -4,13 +4,22 @@ import { ReactNode, useState } from "react"
 import DropDownWithBtn from "./DropDownWithBtn"
 import WalletLoginBtn from "./WalletLoginBtn"
 import UserSectionForm from "./UserSectionForm"
-import { HomeProp } from "."
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { addAccount } from "@/features/user/userSlice"
 
-const AccountSection = ({ defaultAccount, handleMetaLogin }: HomeProp) => {
+const AccountSection = () => {
+    const { handleMetaLogin } = useEthereum()
+    const dispatch = useAppDispatch()
+    const account = useAppSelector(state => state.user.account)
     const [logginIn, setLoggingIn] = useState('')
     const handleLoginType = (type: string) => {
         setLoggingIn(type)
-        if (type === 'metamask') { handleMetaLogin().then(() => setLoggingIn('')) }
+        if (type === 'metamask') { 
+          handleMetaLogin().then((res) => {
+            dispatch(addAccount(res))
+            setLoggingIn('')
+          }) 
+        }
     }
     
     return (
@@ -18,12 +27,12 @@ const AccountSection = ({ defaultAccount, handleMetaLogin }: HomeProp) => {
               <a className='text-[#0091ff] hover:underline hover:decoration-4 mr-5' href="">
                 Wallet
               </a>
-              {!defaultAccount
+              {!account
               ? (
                 <NonUserForm>
                     {loginableList.map((item, key) => <WalletLoginBtn key={key} {...item} loggingIn={logginIn} handleLoginMethod={handleLoginType} />)}
                 </NonUserForm>
-              ) : <UserSectionForm account={defaultAccount} />}
+              ) : <UserSectionForm account={account} />}
               
             </div>
     )

@@ -2,8 +2,7 @@ import TotalValue from '@/components/Balance/TotalValue'
 import AssetBalance from '@/components/Balance/AssetBalance'
 import { BalanceData, defaultBalance } from '@/config/balance'
 
- const Home = ({ defaultAccount } : { defaultAccount: string }) => {
-  console.log('home', defaultAccount)
+ const Home = () => {
   return (
     <>
       <TotalValue />

@@ -1,8 +1,6 @@
 import { ReactNode } from "react"
 import HomeNavbar from "../navbar/HomeNavbar"
 type BodyProp = {
-    defaultAccount: string | null,
-    handleMetaLogin: Function,
     children: ReactNode
 }
 
@@ -10,7 +8,7 @@ type BodyProp = {
 const BodyComponent = (props: BodyProp) => {
     return (
       <main className='flex flex-col min-h-screen bg-[#F7FBFF] relative fam-poppins'>
-        <HomeNavbar defaultAccount={props.defaultAccount} handleMetaLogin={props.handleMetaLogin} />
+        <HomeNavbar />
         <div className='grow relative'>
           <div className='absolute bg-[#0056da] inset-x-0 top-0 h-[22vh] z-0'></div>
           <div className='relative px-[5%] py-[3%]'>

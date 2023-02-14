@@ -1,11 +1,7 @@
 import Image from 'next/image'
 import AccountSection from './AccountSection'
-export type HomeProp = {
-  defaultAccount: string | null,
-  handleMetaLogin: Function
-}
 
-const HomeNavbar = (props: HomeProp) => {
+const HomeNavbar = () => {
     return (
         <div className='w-full bg-white px-[70px] py-[12px] flex justify-between items-center relative'>
           <Image
@@ -16,7 +12,7 @@ const HomeNavbar = (props: HomeProp) => {
             height={37}
             priority
           />
-          <AccountSection {...props} />
+          <AccountSection />
         </div>
     )
 }
