@@ -1,26 +1,28 @@
 import { loginableList } from "@/config/login"
-import { useEthereum } from "@/hooks/ethereum"
-import { ReactNode, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import DropDownWithBtn from "./DropDownWithBtn"
 import WalletLoginBtn from "./WalletLoginBtn"
 import UserSectionForm from "./UserSection/UserSectionForm"
-import { useUser } from "@/hooks/user"
+import { useEthereum } from "@/hooks/ethereum"
 
 const AccountSection = () => {
-    const { handleMetaLogin } = useEthereum()
-    const { account } = useUser()
+  const { active, account, handleLoginMetamask } = useEthereum()
     const [logginIn, setLoggingIn] = useState('')
     const handleLoginType = (type: string) => {
         setLoggingIn(type)
-        if (type === 'metamask') handleMetaLogin().then(() => setLoggingIn('')) 
+        if (type === 'metamask') {
+          handleLoginMetamask()
+        }
     }
-    
+    useEffect(() => {
+      if (active) setLoggingIn('')
+    }, [active])
     return (
             <div className='text-[14px] flex justify-end items-center gap-3'>
               <a className='text-[#0091ff] hover:underline hover:decoration-4 mr-5' href="">
                 Wallet
               </a>
-              {!account
+              {!active && typeof account !== 'string'
               ? (
                 <NonUserForm>
                     {loginableList.map((item, key) => <WalletLoginBtn key={key} {...item} loggingIn={logginIn} handleLoginMethod={handleLoginType} />)}

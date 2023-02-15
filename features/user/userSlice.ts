@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Provider, Signer } from 'ethers'
 
 export interface AddAccountForm { 
-    account: string, 
+    account: string | null | undefined, 
     network: Number | null, 
     provider: Provider | null, 
     signer: Signer | null 
@@ -10,7 +10,7 @@ export interface AddAccountForm {
 
 
 interface UserState {
-    account: string,
+    account: string | null | undefined,
     network: Number | null,
     balance: string,
     provider: Provider | null,

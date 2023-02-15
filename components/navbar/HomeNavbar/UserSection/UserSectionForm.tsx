@@ -6,13 +6,13 @@ import { convertAccount } from "@/functions"
 import Image from "next/image"
 import { useState } from "react"
 import NetworkSelection from "./NetworkSelection"
-import { useUser } from "@/hooks/user"
+import { useEthereum } from "@/hooks/ethereum"
 
-const UserSectionForm = () => {
+const UserSectionForm = () => { 
+    const { account, deactivate } = useEthereum()
     const [copying, setCopying] = useState(false)
-    const { account } = useUser()
     const handleCopy = () => {
-        if (!copying) {
+        if (!copying && typeof account == 'string') {
             setCopying(true)
             navigator.clipboard.writeText(account)
             setTimeout(() => setCopying(false), 3000)
@@ -36,14 +36,14 @@ const UserSectionForm = () => {
                                     height={30}
                                     priority
                                 />
-                                <label className='text-[14px]'>{convertAccount(account)}</label>
+                                <span className='text-[14px]'>{convertAccount(account)}</span>
                         </div>
                         <button className="relative" onClick={handleCopy}>
                           {copying && <MdCheckCircleOutline color='#0091FF' className="absolute inset-0" />}
                           <MdContentCopy color={copying ? '#d9d9d9' : '#0091FF'} />
                         </button>
                     </div>
-                    <button className='ml-auto flex justify-center items-center gap-2 mt-3'>
+                    <button onClick={deactivate} className='ml-auto flex justify-center items-center gap-2 mt-3'>
                         <MdLogout /> Logout
                     </button>
             </div>

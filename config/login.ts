@@ -9,7 +9,8 @@ export const loginableList: loginType[] = [
 export interface NetworkType {
     name: string,
     img: string,
-    netId: Number
+    netId: Number,
+    switchAction?: Function
 }
 
 export const networkList: NetworkType[] = [
