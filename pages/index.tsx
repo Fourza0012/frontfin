@@ -1,8 +1,13 @@
 import TotalValue from '@/components/Balance/TotalValue'
 import AssetBalance from '@/components/Balance/AssetBalance'
 import { BalanceData, defaultBalance } from '@/config/balance'
+import { useUser } from '@/hooks/user'
+import { useEthereum } from '@/hooks/ethereum'
 
  const Home = () => {
+  const { active } = useEthereum()
+  const { userData, handleAddUserData } = useUser()
+  console.log('userData', userData)
   return (
     <>
       <TotalValue />
@@ -11,9 +16,14 @@ import { BalanceData, defaultBalance } from '@/config/balance'
           <span>Assets</span>
           <span>Balances</span>
       </div>
+      {!active || userData 
+      ? (
       <div className='flex flex-col pt-[1%] gap-2'>
         {defaultBalance.map((item: BalanceData, key) => <AssetBalance key={key} {...item} />)}
-      </div>
+      </div>)
+      : (
+        <button onClick={handleAddUserData}>test</button>
+      )}
       </div>
     </>
   )

@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { addAccount, AddAccountForm } from "@/features/user/userSlice"
+import { addUserData } from "@/features/user/userSlice"
 
 export const useUser = () => {
     const dispatch = useAppDispatch()
-    const account = useAppSelector(state => state.user.account)
-    const handleAddAccount = (res: AddAccountForm) => dispatch(addAccount(res))
+    const userData = useAppSelector(state => state.user.userData)
+    const handleAddUserData = () => dispatch(addUserData())
     return {
-        account,
-        handleAddAccount
+        userData,
+        handleAddUserData
     }
 }

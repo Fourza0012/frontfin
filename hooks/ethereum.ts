@@ -3,6 +3,7 @@ import { Web3Provider } from '@ethersproject/providers'
 import { injected } from "@/config/connector"
 import { UserRejectedRequestError } from '@web3-react/injected-connector'
 import { convertHexadecimal } from "@/functions"
+import { defaultNetwork } from "@/config/login"
 
 export const useEthereum = () => {
     const { activate, setError, active, account, library, deactivate, chainId } = useWeb3React<Web3Provider>()
@@ -20,8 +21,9 @@ export const useEthereum = () => {
 
     const switchNetwork = async (netId: number) => {
       const formatNetId = convertHexadecimal(netId)
+      if (library) {
             try {
-                    await library.provider.request({
+                    await library.provider.request?.({
                     method: "wallet_switchEthereumChain",
                     params: [{ chainId: formatNetId }],
                     })
@@ -30,24 +32,16 @@ export const useEthereum = () => {
                 // 4902 error code indicates the chain is missing on the wallet
                 if (switchError.code === 4902) {
                   try {
-                    // await library.provider.request({
-                    //   method: "wallet_addEthereumChain",
-                    //   params: [
-                    //     {
-                    //       chainId: "0x63564c40",
-                    //       rpcUrls: ["https://api.harmony.one"],
-                    //       chainName: "Harmony Mainnet",
-                    //       nativeCurrency: { name: "ONE", decimals: 18, symbol: "ONE" },
-                    //       blockExplorerUrls: ["https://explorer.harmony.one"],
-                    //       iconUrls: ["https://harmonynews.one/wp-content/uploads/2019/11/slfdjs.png"]
-                    //     }
-                    //   ],
-                    // })
+                    await library.provider.request?.({
+                      method: "wallet_addEthereumChain",
+                      params: [defaultNetwork],
+                    })
                   } catch (error) {
                      console.error('error', error)
                   }
                 }
-              }
+              }        
+        }
       }
 
     return {

@@ -5,7 +5,6 @@ import DropDownWithBtn from "../DropDownWithBtn"
 import { NetworkType } from '@/config/login'
 import { FaChevronDown } from "react-icons/fa"
 import { useEthereum } from "@/hooks/ethereum"
-import { convertHexadecimal } from "@/functions"
 
 const NetworkSelection = () => {
     const { switchNetwork } = useEthereum()

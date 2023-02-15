@@ -1,42 +1,35 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Provider, Signer } from 'ethers'
 
-export interface AddAccountForm { 
-    account: string | null | undefined, 
-    network: Number | null, 
-    provider: Provider | null, 
-    signer: Signer | null 
+interface UserFrom {
+    firstname: string,
+    lastname: string,
+    phone: string,
+    email: string,
+    idCard?: File | null
 }
 
-
 interface UserState {
-    account: string | null | undefined,
-    network: Number | null,
-    balance: string,
-    provider: Provider | null,
-    signer: Signer | null
+    userData: UserFrom | null
 }
 
 const initialState: UserState = {
-    account: '',
-    network: null,
-    balance: '',
-    provider: null,
-    signer: null
+    userData: null
 }
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        addAccount: (state, action: PayloadAction<AddAccountForm>) => {
-            state.account = action.payload.account
-            state.network = action.payload.network
-            state.provider = action.payload.provider
-            state.signer = action.payload.signer
+        addUserData: (state) => {
+            state.userData = {
+                firstname: '',
+                lastname: '',
+                phone: '',
+                email: '',
+            }
         }
     },
 })
 
-export const { addAccount } = userSlice.actions
+export const { addUserData } = userSlice.actions
 export default userSlice.reducer
