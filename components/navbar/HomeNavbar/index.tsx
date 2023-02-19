@@ -3,7 +3,7 @@ import AccountSection from './AccountSection'
 
 const HomeNavbar = () => {
     return (
-        <div className='w-full bg-white px-[70px] py-[12px] flex justify-between items-center relative'>
+        <div className='absolute w-full bg-white px-[70px] py-[12px] flex justify-between items-center z-[1]'>
           <Image
             src="/image/finstable.png"
             alt="Finstable"

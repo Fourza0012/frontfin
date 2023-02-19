@@ -3,6 +3,7 @@ import AssetBalance from '@/components/Balance/AssetBalance'
 import { BalanceData, defaultBalance } from '@/config/balance'
 import { useUser } from '@/hooks/user'
 import { useEthereum } from '@/hooks/ethereum'
+import VerificationKYC from '@/components/KYC/VerificationKYC'
 
  const Home = () => {
   const { active } = useEthereum()
@@ -22,7 +23,7 @@ import { useEthereum } from '@/hooks/ethereum'
         {defaultBalance.map((item: BalanceData, key) => <AssetBalance key={key} {...item} />)}
       </div>)
       : (
-        <button onClick={handleAddUserData}>test</button>
+        <VerificationKYC />
       )}
       </div>
     </>
